@@ -182,7 +182,7 @@ def check_recaptcha(recaptcha_response) -> bool:
     if recaptcha_response == '':
         return False
 
-    recaptcha_params = {'secret': '6LeoCF0UAAAAAA0r6DgaamYU4ws5ADrMcvJvymoa', 'response': recaptcha_response}
+    recaptcha_params = {'secret': os.getenv("RECAPTCHA_SECRET"), 'response': recaptcha_response}
     recaptcha_result = requests.post('https://www.google.com/recaptcha/api/siteverify', data=recaptcha_params)
 
     if recaptcha_result.status_code != 200 or simplejson.loads(recaptcha_result.content)['success'] is not True:
